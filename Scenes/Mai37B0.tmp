@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bukr0lu2jfxic"]
+
+[ext_resource type="PackedScene" uid="uid://dscy50w1eoxkw" path="res://Scenes/Characters/Player/Player.tscn" id="1_m42hi"]
+[ext_resource type="PackedScene" uid="uid://rwjxxmvqu1u7" path="res://UI/UI.tscn" id="2_2f52r"]
+[ext_resource type="PackedScene" uid="uid://gw5k0uf7qr3l" path="res://Scenes/World/World.tscn" id="2_5wilu"]
+[ext_resource type="Script" path="res://Scenes/Systems/Camera2D.gd" id="4_yuxjt"]
+[ext_resource type="PackedScene" uid="uid://buokvcc32o68y" path="res://Scenes/Systems/WaveController/WaveController.tscn" id="5_t8he1"]
+
+[node name="Main" type="Node2D"]
+
+[node name="World" parent="." instance=ExtResource("2_5wilu")]
+
+[node name="WaveController" parent="." instance=ExtResource("5_t8he1")]
+position = Vector2(1024, 505)
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_m42hi")]
+position = Vector2(952, 553)
+moveSpeed = 600.0
+
+[node name="UI" parent="." node_paths=PackedStringArray("player", "waveController") instance=ExtResource("2_2f52r")]
+player = NodePath("../Player")
+waveController = NodePath("../WaveController")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(960, 540)
+position_smoothing_enabled = true
+script = ExtResource("4_yuxjt")
+target = NodePath("../Player")
+SHAKE_SPEED = 100.0

@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq6i2diptxt7q"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_4d8ny"]
+
+[node name="MainMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_4d8ny")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.147672, 0.147672, 0.147672, 1)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "Hello there!
+Walk, shoot, avoid enemies and bullets,
+get stronger and at the end... kill the boss!
+
+Use WSAD to move and LMB to shoot
+
+Author:
+CamaroTheBOSS"
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 786.0
+offset_top = 926.0
+offset_right = 1143.0
+offset_bottom = 1057.0
+theme_override_font_sizes/font_size = 50
+text = "Start"

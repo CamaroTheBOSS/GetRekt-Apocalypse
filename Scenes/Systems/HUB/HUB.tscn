@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://c445q7olyo4o6"]
+
+[ext_resource type="StyleBox" uid="uid://d1yk2e5mmberd" path="res://UI/Styles/Money.tres" id="1_31d61"]
+[ext_resource type="Script" path="res://Scenes/Systems/HUB/HUB.gd" id="1_ku2vj"]
+[ext_resource type="PackedScene" uid="uid://ccqoyj40jalt0" path="res://Scenes/Systems/HUB/StatInShopEntry.tscn" id="1_yfjls"]
+
+[node name="HUB" type="CanvasLayer"]
+script = ExtResource("1_ku2vj")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+
+[node name="Damage" parent="Background/MarginContainer/VBoxContainer" instance=ExtResource("1_yfjls")]
+layout_mode = 2
+
+[node name="Health" parent="Background/MarginContainer/VBoxContainer" instance=ExtResource("1_yfjls")]
+layout_mode = 2
+text = "+ Health            "
+
+[node name="ShootRatio" parent="Background/MarginContainer/VBoxContainer" instance=ExtResource("1_yfjls")]
+layout_mode = 2
+text = "+ Shoot Ratio   "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="NextWave" type="Button" parent="Background/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+text = "Next Wave"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.822
+anchor_right = 1.0
+anchor_bottom = 0.142
+offset_left = -0.23999
+offset_bottom = -0.360001
+grow_horizontal = 0
+
+[node name="Money" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.272
+anchor_top = 0.405
+anchor_right = 0.272
+anchor_bottom = 0.405
+offset_left = -0.0240021
+offset_top = 0.034996
+offset_right = 46.976
+offset_bottom = 46.035
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_31d61")
+
+[node name="Label" type="Label" parent="Control/Money"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = -12.0
+offset_right = 228.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="Statistics" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -536.0
+offset_right = 595.0
+grow_vertical = 0
+
+[node name="StatisticsLabel" type="Label" parent="Statistics"]
+layout_mode = 2
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 531.0
+offset_bottom = 349.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "Statistics:
+Damage:       xx
+Max Health: xx
+Shoot Ratio: xx"

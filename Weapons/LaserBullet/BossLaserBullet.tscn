@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://u45bjaw5magg"]
+
+[ext_resource type="Script" path="res://Weapons/LaserBullet/BossLaserBullet.gd" id="1_8n8y2"]
+[ext_resource type="Texture2D" uid="uid://dw4recvsxacxh" path="res://Weapons/MagicTotem/spectral_bullet.png" id="2_m3q71"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_maxt6"]
+
+[node name="BossLaserBullet" type="Area2D"]
+script = ExtResource("1_8n8y2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_maxt6")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1.2, 1, 2, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_m3q71")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

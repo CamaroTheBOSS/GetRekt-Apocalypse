@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://nquomowduesf"]
+
+[ext_resource type="Script" path="res://Scenes/WinMenu.gd" id="1_3jgwx"]
+
+[node name="WinMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_3jgwx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.147672, 0.147672, 0.147672, 1)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "
+Thanks for playing!
+If you enjoyed, please let me know
+
+
+Author:
+CamaroTheBOSS"
+horizontal_alignment = 1
+
+[node name="MainMenu" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 786.0
+offset_top = 792.0
+offset_right = 1143.0
+offset_bottom = 923.0
+theme_override_font_sizes/font_size = 50
+text = "Main menu"
+
+[node name="TryAgain" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 786.0
+offset_top = 926.0
+offset_right = 1143.0
+offset_bottom = 1057.0
+theme_override_font_sizes/font_size = 50
+text = "Try again"

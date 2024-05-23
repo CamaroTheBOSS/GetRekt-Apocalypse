@@ -1,0 +1,78 @@
+[gd_scene load_steps=15 format=3 uid="uid://buokvcc32o68y"]
+
+[ext_resource type="Script" path="res://Scenes/Systems/WaveController/WaveController.gd" id="1_08scq"]
+[ext_resource type="PackedScene" uid="uid://yklg5qvosqgn" path="res://Scenes/Systems/WaveController/SpawnTimer.tscn" id="2_1m67g"]
+[ext_resource type="PackedScene" uid="uid://dem00wq27b73g" path="res://Scenes/Characters/Enemies/Enemy.tscn" id="3_lt1m4"]
+[ext_resource type="PackedScene" uid="uid://c6ovgwsm1kb0c" path="res://Scenes/Characters/Enemies/EnemyShooting.tscn" id="4_dyuem"]
+[ext_resource type="PackedScene" uid="uid://co64e6h5c4ikq" path="res://Scenes/Characters/Enemies/EnemyShootingHarder.tscn" id="5_uxx8a"]
+[ext_resource type="Script" path="res://Scenes/Systems/WaveController/BossSpawner.gd" id="6_2jed7"]
+[ext_resource type="PackedScene" uid="uid://drxw54rpxt8gg" path="res://Scenes/Characters/Enemies/EnemyShootingAround.tscn" id="6_ldksq"]
+[ext_resource type="PackedScene" uid="uid://cbyevb0fxhqbe" path="res://Scenes/Characters/Enemies/BOSS.tscn" id="7_yprs2"]
+
+[sub_resource type="Curve" id="Curve_lad4y"]
+min_value = 15.0
+max_value = 60.0
+_data = [Vector2(0, 15), 0.0, 0.0, 0, 0, Vector2(0.110526, 26.3736), 18.7912, 18.7912, 0, 0, Vector2(0.294737, 40.2198), 93.9561, 93.9561, 0, 0, Vector2(0.563158, 52.5824), 0.0, 0.0, 0, 0, Vector2(0.778947, 60), 0.0, 0.0, 0, 0, Vector2(1, 60), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y67m5"]
+size = Vector2(3318, 1836)
+
+[sub_resource type="Curve" id="Curve_mqg8x"]
+max_value = 1.5
+_data = [Vector2(0, 0.89011), 0.0, 0.0, 0, 0, Vector2(0.252475, 1.48352), 0.0, 0.0, 0, 0, Vector2(0.494737, 0.956044), 0.0, 0.0, 0, 0, Vector2(0.942105, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 1.25275), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_fle57"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.126316, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.531579, 0.494505), 0.0, 0.0, 0, 0, Vector2(0.936842, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.835165), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_d0s3l"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.273684, 0), 0.0, 0.0, 0, 0, Vector2(0.426316, 0.21978), 0.0, 0.0, 0, 0, Vector2(0.657895, 0.362637), 0.0, 0.0, 0, 0, Vector2(0.947368, 0.395604), 0.0, 0.0, 0, 0, Vector2(1, 0.274725), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_pb446"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.455446, 0), 0.0, 0.0, 0, 0, Vector2(0.534653, 0.21978), 0.0, 0.0, 0, 0, Vector2(0.970297, 0.483516), 0.0, 0.0, 0, 0, Vector2(1, 0.373626), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="WaveController" type="Node2D"]
+script = ExtResource("1_08scq")
+waveBalanceCurve = SubResource("Curve_lad4y")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="SpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+position = Vector2(-98, 26)
+shape = SubResource("RectangleShape2D_y67m5")
+
+[node name="WaveTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnTimers" type="Node" parent="."]
+
+[node name="SimpleEnemy" parent="SpawnTimers" node_paths=PackedStringArray("waveController") instance=ExtResource("2_1m67g")]
+prefab = ExtResource("3_lt1m4")
+balanceCurve = SubResource("Curve_mqg8x")
+waveController = NodePath("../..")
+
+[node name="ShootingEnemy" parent="SpawnTimers" node_paths=PackedStringArray("waveController") instance=ExtResource("2_1m67g")]
+prefab = ExtResource("4_dyuem")
+balanceCurve = SubResource("Curve_fle57")
+waveController = NodePath("../..")
+
+[node name="ShootingHarderEnemy" parent="SpawnTimers" node_paths=PackedStringArray("waveController") instance=ExtResource("2_1m67g")]
+prefab = ExtResource("5_uxx8a")
+balanceCurve = SubResource("Curve_d0s3l")
+waveController = NodePath("../..")
+
+[node name="ShootingEnemyAround" parent="SpawnTimers" node_paths=PackedStringArray("waveController") instance=ExtResource("2_1m67g")]
+prefab = ExtResource("6_ldksq")
+balanceCurve = SubResource("Curve_pb446")
+waveController = NodePath("../..")
+
+[node name="Boss" type="Timer" parent="SpawnTimers" node_paths=PackedStringArray("waveController")]
+script = ExtResource("6_2jed7")
+prefab = ExtResource("7_yprs2")
+waveController = NodePath("../..")

@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://gw5k0uf7qr3l"]
+
+[ext_resource type="PackedScene" uid="uid://b2mcw4fi86xrm" path="res://Scenes/World/Border.tscn" id="1_n3r1t"]
+
+[node name="World" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = -2545.0
+offset_top = -1877.0
+offset_right = 4629.0
+offset_bottom = 3044.0
+color = Color(0.101961, 0.109804, 0.172549, 1)
+
+[node name="LeftBorder" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(-1024, -471)
+size = Vector2(100, 2000)
+
+[node name="RightBorder" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(2776, -471)
+size = Vector2(100, 2000)
+
+[node name="UpperBorder" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(-1024, -571)
+size = Vector2(3900, 100)
+
+[node name="DownBorder" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(-1024, 1529)
+size = Vector2(3900, 100)
+
+[node name="Obstacle1" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(-407, 485)
+
+[node name="Obstacle2" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(1621, 1087)
+
+[node name="Obstacle3" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(2095, 486)
+
+[node name="Obstacle4" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(1607, -102)
+
+[node name="Obstacle5" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(4, -104)
+
+[node name="Obstacle6" parent="." instance=ExtResource("1_n3r1t")]
+position = Vector2(53, 1080)

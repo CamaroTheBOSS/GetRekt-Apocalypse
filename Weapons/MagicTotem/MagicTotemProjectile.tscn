@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl85idvob0p2a"]
+
+[ext_resource type="Script" path="res://Weapons/MagicTotem/MagicTotemProjectile.gd" id="1_nk67q"]
+[ext_resource type="Texture2D" uid="uid://dw4recvsxacxh" path="res://Weapons/MagicTotem/spectral_bullet.png" id="1_xna5e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8jq5h"]
+radius = 32.0624
+
+[node name="MagicTotemProjectile" type="Area2D"]
+top_level = true
+script = ExtResource("1_nk67q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_8jq5h")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1.2, 1.2, 2, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_xna5e")
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true

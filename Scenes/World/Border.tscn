@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2mcw4fi86xrm"]
+
+[ext_resource type="Script" path="res://Scenes/World/Border.gd" id="1_fgp8f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2ohc"]
+size = Vector2(100, 100)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fhw5u"]
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+
+[node name="Border" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_fgp8f")
+
+[node name="BorderRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.364706, 0.152941, 0.364706, 1)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_h2ohc")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_fhw5u")

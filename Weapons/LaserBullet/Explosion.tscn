@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp6270b2wim3u"]
+
+[ext_resource type="Script" path="res://Weapons/LaserBullet/Explosion.gd" id="1_2t5n0"]
+[ext_resource type="Texture2D" uid="uid://b40loikqg6nk3" path="res://Weapons/LaserBullet/explosion.png" id="1_55rlg"]
+[ext_resource type="Texture2D" uid="uid://04ucsu34vbw2" path="res://pointLight.png" id="3_4jgvt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f6maj"]
+radius = 104.0
+
+[node name="Explosion" type="Area2D"]
+top_level = true
+script = ExtResource("1_2t5n0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f6maj")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+scale = Vector2(0.876414, 0.876414)
+texture = ExtResource("1_55rlg")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("3_4jgvt")

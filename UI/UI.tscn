@@ -1,0 +1,192 @@
+[gd_scene load_steps=11 format=3 uid="uid://rwjxxmvqu1u7"]
+
+[ext_resource type="StyleBox" uid="uid://dondgpsv8b8yv" path="res://UI/Styles/HealthProgressBar.tres" id="1_cbgwp"]
+[ext_resource type="Script" path="res://UI/UI.gd" id="1_u8k7m"]
+[ext_resource type="StyleBox" uid="uid://cw0gg23pqy6g4" path="res://UI/Styles/healthBackground.tres" id="2_0rvpg"]
+[ext_resource type="StyleBox" uid="uid://d1yk2e5mmberd" path="res://UI/Styles/Money.tres" id="3_x77u2"]
+[ext_resource type="Texture2D" uid="uid://c4c6wkhc2el82" path="res://Weapons/default.png" id="4_732j1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gbpdt"]
+
+[sub_resource type="FontVariation" id="FontVariation_pq6c0"]
+spacing_top = -10
+spacing_bottom = -10
+
+[sub_resource type="Animation" id="Animation_q5b2b"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.74902, 0.270588, 0.34902, 0), Color(0.74902, 0.270588, 0.34902, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3sxqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3t6sb"]
+_data = {
+"FadeIn": SubResource("Animation_q5b2b"),
+"RESET": SubResource("Animation_3sxqn")
+}
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_u8k7m")
+
+[node name="ManaHealth" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.308
+anchor_bottom = 0.21
+offset_right = -0.360046
+offset_bottom = 0.199997
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="ManaHealth"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 432.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("2_0rvpg")
+theme_override_styles/fill = ExtResource("1_cbgwp")
+value = 50.0
+show_percentage = false
+
+[node name="Money" type="Panel" parent="ManaHealth"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 100.0
+offset_right = 79.0
+offset_bottom = 146.0
+theme_override_styles/panel = ExtResource("3_x77u2")
+
+[node name="Label" type="Label" parent="ManaHealth/Money"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = -12.0
+offset_right = 228.0
+offset_bottom = 55.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "100"
+
+[node name="WeaponIcon" type="TextureProgressBar" parent="ManaHealth"]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 35.0
+offset_right = 569.0
+offset_bottom = 147.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_under = ExtResource("4_732j1")
+texture_progress = SubResource("CompressedTexture2D_gbpdt")
+
+[node name="WaveInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -204.0
+offset_right = 204.0
+offset_bottom = 236.0
+grow_horizontal = 2
+
+[node name="WaveLabel" type="Label" parent="WaveInfo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -166.0
+offset_right = 167.0
+offset_bottom = 196.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_pq6c0")
+theme_override_font_sizes/font_size = 78
+text = "Wave: xx
+yy"
+horizontal_alignment = 1
+
+[node name="PlayerDeath" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 496.0
+offset_top = 303.0
+offset_right = 1411.0
+offset_bottom = 625.0
+
+[node name="WaveLabel" type="Label" parent="PlayerDeath"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -166.0
+offset_right = 167.0
+offset_bottom = 196.0
+grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontVariation_pq6c0")
+theme_override_font_sizes/font_size = 78
+text = "You died, 
+press Z to try again"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerDeath"]
+libraries = {
+"": SubResource("AnimationLibrary_3t6sb")
+}
+
+[node name="Boss" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.119
+anchor_top = 0.871
+anchor_right = 0.874
+anchor_bottom = 1.0
+offset_left = 11.52
+offset_top = 90.3199
+offset_right = -0.0800781
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HealthBar" type="ProgressBar" parent="Boss"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.796
+anchor_right = 1.0
+anchor_bottom = 0.204
+offset_top = 0.00400162
+offset_bottom = 0.00399971
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("2_0rvpg")
+theme_override_styles/fill = ExtResource("1_cbgwp")
+value = 50.0
+show_percentage = false

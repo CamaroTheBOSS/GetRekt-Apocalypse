@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6ovgwsm1kb0c"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/Enemies/EnemyShooting.gd" id="1_v1qym"]
+[ext_resource type="Animation" uid="uid://c6vj1jwcgt7tw" path="res://Animations/reset_no_weapon.res" id="2_ep205"]
+[ext_resource type="Animation" uid="uid://bhfhbsb3skq3p" path="res://Animations/death_no_weapon.res" id="3_mdbmi"]
+[ext_resource type="Animation" uid="uid://ds6kpxghlys1v" path="res://Animations/hit_no_weapon.res" id="4_vk3qi"]
+[ext_resource type="Animation" uid="uid://tng8lgkk4u23" path="res://Animations/move_no_weapon.res" id="5_y7ipu"]
+[ext_resource type="Animation" uid="uid://bvdgcka4i8oa0" path="res://Animations/spawn.res" id="6_8i76m"]
+[ext_resource type="Script" path="res://Scenes/Systems/StateMachine/FiniteStateMachine.gd" id="7_jimhx"]
+[ext_resource type="PackedScene" uid="uid://c1cre3ajlfu4g" path="res://Scenes/Systems/StateMachine/State.tscn" id="8_e0487"]
+[ext_resource type="Script" path="res://Scenes/Systems/StateMachine/WalkAndShoot.gd" id="9_41vlh"]
+[ext_resource type="PackedScene" uid="uid://bete2cv4wu0df" path="res://Weapons/Pistol/Weapon.tscn" id="10_nx8gq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0j0mi"]
+size = Vector2(83, 105)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1346"]
+size = Vector2(83, 105)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o7v0e"]
+_data = {
+"RESET": ExtResource("2_ep205"),
+"death": ExtResource("3_mdbmi"),
+"hit": ExtResource("4_vk3qi"),
+"move": ExtResource("5_y7ipu"),
+"spawn": ExtResource("6_8i76m")
+}
+
+[node name="EnemyShooting" type="CharacterBody2D"]
+top_level = true
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_v1qym")
+damage = 1.0
+maxHealth = 10.0
+currHealth = 10.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -42.0
+offset_top = -53.0
+offset_right = 41.0
+offset_bottom = 52.0
+pivot_offset = Vector2(42, 53)
+color = Color(0.937255, 0.490196, 0.341176, 1)
+
+[node name="BodyHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_0j0mi")
+
+[node name="DamageCollider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageCollider"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_n1346")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o7v0e")
+}
+autoplay = "spawn"
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("7_jimhx")
+initialState = NodePath("WalkAndShoot")
+
+[node name="WalkAndShoot" parent="FiniteStateMachine" node_paths=PackedStringArray("entity", "_weapon") instance=ExtResource("8_e0487")]
+script = ExtResource("9_41vlh")
+entity = NodePath("../..")
+moveSpeed = 200.0
+_weapon = NodePath("../../Weapon")
+
+[node name="Weapon" parent="." instance=ExtResource("10_nx8gq")]
+shootRatio = 0.25
+shootSpeed = 400.0
+damage = 1.0

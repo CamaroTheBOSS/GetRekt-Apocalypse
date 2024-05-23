@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://vk5q5okx85x5"]
+
+[ext_resource type="Script" path="res://Weapons/LongDistShotGun/ShotGun.gd" id="1_it07v"]
+[ext_resource type="Texture2D" uid="uid://bt6aj0apyckgr" path="res://Weapons/LongDistShotGun/shotgun.png" id="4_qnqh4"]
+
+[node name="Weapon" type="Node2D"]
+z_index = 2
+script = ExtResource("1_it07v")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(53, 5.96046e-08)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("4_qnqh4")
+
+[node name="Reload" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(85, -6)

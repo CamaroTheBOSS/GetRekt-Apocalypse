@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bete2cv4wu0df"]
+
+[ext_resource type="Script" path="res://Weapons/Pistol/Weapon.gd" id="1_j7ck5"]
+[ext_resource type="PackedScene" uid="uid://2pq2veo6bk4e" path="res://Weapons/LaserBullet/LaserBullet.tscn" id="2_um8mx"]
+[ext_resource type="Texture2D" uid="uid://ibstmd4xpoyp" path="res://Weapons/Pistol/pistol_icon.png" id="3_7kbtp"]
+[ext_resource type="Texture2D" uid="uid://b1bn115wi86r6" path="res://Weapons/Pistol/pistol.png" id="4_ysk3m"]
+
+[node name="Weapon" type="Node2D"]
+z_index = 2
+script = ExtResource("1_j7ck5")
+projectileScene = ExtResource("2_um8mx")
+shootRatio = 2.0
+shootSpeed = 1500.0
+damage = 50.0
+icon = ExtResource("3_7kbtp")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(35, -0.789916)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("4_ysk3m")
+
+[node name="Reload" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(85, -6)

@@ -1,0 +1,147 @@
+[gd_scene load_steps=19 format=3 uid="uid://bukr0lu2jfxic"]
+
+[ext_resource type="Script" path="res://Scenes/Main.gd" id="1_dp5gm"]
+[ext_resource type="PackedScene" uid="uid://dscy50w1eoxkw" path="res://Scenes/Characters/Player/Player.tscn" id="1_m42hi"]
+[ext_resource type="PackedScene" uid="uid://rwjxxmvqu1u7" path="res://UI/UI.tscn" id="2_2f52r"]
+[ext_resource type="PackedScene" uid="uid://gw5k0uf7qr3l" path="res://Scenes/World/World.tscn" id="2_5wilu"]
+[ext_resource type="Script" path="res://Scenes/Systems/Camera2D.gd" id="4_yuxjt"]
+[ext_resource type="Texture2D" uid="uid://04ucsu34vbw2" path="res://pointLight.png" id="5_ouyr7"]
+[ext_resource type="PackedScene" uid="uid://buokvcc32o68y" path="res://Scenes/Systems/WaveController/WaveController.tscn" id="5_t8he1"]
+[ext_resource type="PackedScene" uid="uid://c445q7olyo4o6" path="res://Scenes/Systems/HUB/HUB.tscn" id="6_lfqiy"]
+[ext_resource type="PackedScene" uid="uid://nquomowduesf" path="res://Scenes/WinMenu.tscn" id="8_dtrwh"]
+[ext_resource type="PackedScene" uid="uid://dq6i2diptxt7q" path="res://Scenes/MainMenu.tscn" id="9_6o8se"]
+
+[sub_resource type="Gradient" id="Gradient_7vrso"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1lecu"]
+gradient = SubResource("Gradient_7vrso")
+fill_to = Vector2(0.530303, 0.606061)
+
+[sub_resource type="Environment" id="Environment_yjn3a"]
+background_mode = 3
+background_canvas_max_layer = 1
+tonemap_mode = 1
+tonemap_exposure = 1.63
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/3 = 0.0
+glow_levels/4 = 1.0
+glow_levels/5 = 0.0
+glow_intensity = 0.3
+glow_strength = 1.02
+glow_bloom = 0.3
+glow_blend_mode = 4
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture2D_1lecu")
+
+[sub_resource type="Gradient" id="Gradient_4que1"]
+offsets = PackedFloat32Array(0.688525, 0.959016, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.401639, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rfndl"]
+gradient = SubResource("Gradient_4que1")
+
+[sub_resource type="Curve" id="Curve_n7ooc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.494505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pfkgr"]
+curve = SubResource("Curve_n7ooc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5f25"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1850, 1000, 1)
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 15.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_pfkgr")
+color = Color(0.2, 0.235294, 0.341176, 1)
+color_ramp = SubResource("GradientTexture1D_rfndl")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed = Vector3(2, 0, 0)
+turbulence_noise_speed_random = 0.5
+turbulence_influence_min = 0.092
+turbulence_influence_max = 0.092
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_dp5gm")
+
+[node name="World" parent="." instance=ExtResource("2_5wilu")]
+
+[node name="WaveController" parent="." instance=ExtResource("5_t8he1")]
+position = Vector2(1024, 505)
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_m42hi")]
+position = Vector2(952, 553)
+moveSpeed = 600.0
+maxHealth = 5.0
+currHealth = 5.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yjn3a")
+
+[node name="PointLight2D2" type="PointLight2D" parent="WorldEnvironment"]
+position = Vector2(-891, 1342)
+scale = Vector2(5.90171, 4.39418)
+shadow_enabled = true
+texture = ExtResource("5_ouyr7")
+
+[node name="PointLight2D3" type="PointLight2D" parent="WorldEnvironment"]
+position = Vector2(-871, -363)
+scale = Vector2(5.90171, 4.39418)
+shadow_enabled = true
+texture = ExtResource("5_ouyr7")
+
+[node name="PointLight2D4" type="PointLight2D" parent="WorldEnvironment"]
+position = Vector2(2512, 1267)
+scale = Vector2(5.90171, 4.39418)
+shadow_enabled = true
+texture = ExtResource("5_ouyr7")
+
+[node name="PointLight2D5" type="PointLight2D" parent="WorldEnvironment"]
+position = Vector2(2457, -246)
+scale = Vector2(5.90171, 4.39418)
+shadow_enabled = true
+texture = ExtResource("5_ouyr7")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="WorldEnvironment"]
+position = Vector2(930, 535)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_c5f25")
+lifetime = 15.0
+randomness = 1.0
+visibility_rect = Rect2(-1850, -1000, 3700, 2000)
+
+[node name="UI" parent="." node_paths=PackedStringArray("player", "waveController") instance=ExtResource("2_2f52r")]
+player = NodePath("../Player")
+waveController = NodePath("../WaveController")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(960, 540)
+position_smoothing_enabled = true
+script = ExtResource("4_yuxjt")
+target = NodePath("../Player")
+SHAKE_SPEED = 100.0
+
+[node name="HUB" parent="." node_paths=PackedStringArray("player", "waveController") instance=ExtResource("6_lfqiy")]
+process_mode = 3
+visible = false
+player = NodePath("../Player")
+waveController = NodePath("../WaveController")
+
+[node name="WinMenu" parent="." node_paths=PackedStringArray("mainMenu") instance=ExtResource("8_dtrwh")]
+visible = false
+mainMenu = NodePath("../MainMenu")
+
+[node name="MainMenu" parent="." instance=ExtResource("9_6o8se")]
+visible = false

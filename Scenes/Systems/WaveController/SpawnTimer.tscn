@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yklg5qvosqgn"]
+
+[ext_resource type="Script" path="res://Scenes/Systems/WaveController/SpawnTimer.gd" id="1_nfiye"]
+
+[node name="SpawnTimer" type="Timer"]
+script = ExtResource("1_nfiye")
